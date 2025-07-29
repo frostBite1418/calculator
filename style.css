@@ -43,6 +43,10 @@ button {
     border-radius: 3px;
 }
 
+button:hover {
+    background-color: rgb(190, 190, 190);
+}
+
 .first-row,
 .second-row,
 .third-row,
