@@ -1,0 +1,58 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container{
+    width: 200px;
+    height: 300px;
+    padding: 30px 30px 75px 30px;
+    border: 2px solid black;
+    background-color: gray;
+    display: flex;
+    flex-direction: column;
+    border-radius: 3px;
+}
+
+.display {
+    margin-bottom: 10px;
+    text-align: end;
+    border: 1px solid black;
+    padding: 15px;
+    font-size: 20px;
+    border-radius: 3px;
+    background-color: white;
+}
+
+.bottom {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    gap: 10px;
+}
+
+button {
+    width: 40px;
+    height: 48px;
+    padding: 10px;
+    border-radius: 3px;
+}
+
+.first-row,
+.second-row,
+.third-row,
+.fourth-row {
+    display: flex;
+    justify-content: space-between;
+}
+
+.fifth-row {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.equals {
+    flex-grow: 1;
+}
