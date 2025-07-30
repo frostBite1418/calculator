@@ -12,28 +12,64 @@ const buttonBackSpace = document.querySelector(".backspace");
 let num1 = "";
 let num2 = "";
 let operator = "";
+let total = "";
+let attempt = 0;
+
+
+
+
+// Events
+buttonEquals.addEventListener("click", () => {
+    if (display.textContent !== "") {
+        display.textContent = operate(operator, num1, num2);
+    }
+    operator = "";
+    num1 = operate(operator, num1, num2).toString();
+    num2 = "";
+    buttonDot.disabled = false;
+})
+
+buttonDot.addEventListener("click", (e) => {
+    if (operator === "") {
+        buttonDot.disabled = true;
+        display.textContent += e.target.innerText;
+        return num1 += e.target.innerText;
+    } else {
+        buttonDot.disabled = true;
+        display.textContent += e.target.innerText;
+        return num1 += e.target.innerText;
+    }
+})
 
 // update display when button is clicked
 buttonBackSpace.addEventListener("click", () => {
-    // displayNumber.at(-1) = ""
-    // display.textContent -= displayNumber;
+    if (operator === "") {
+        num1 = num1.substring(0, num1.length - 1)
+        display.textContent = num1;
+    } else {
+        num2 = num2.substring(0, num2.length - 1)
+        display.textContent = num1 + operator + num2;
+    }
 
 })
 
 buttonClear.addEventListener("click", () => {
-    displayNumber = "";
     display.textContent = "";
+    num1 = "";
+    num2 = "";
+    operator = "";
+    buttonDot.disabled = false;
 
 })
 
 buttonNumbers.forEach(button => {
     button.addEventListener("click", (e) => {
         if (operator === "") {
-            num1 += e.target.innerText;
             display.textContent += e.target.innerText;
+            return num1 += e.target.innerText;
         } else {
-            num2 += e.target.innerText;
             display.textContent += e.target.innerText;
+            return num2 += e.target.innerText;
         }
     })
 })
@@ -43,6 +79,13 @@ buttonOperators.forEach(button => {
         if (operator === "") {
             operator += e.target.innerText;
             display.textContent += e.target.innerText;
+            buttonDot.disabled = false;
+        } else {
+            num1 = operate(operator, num1, num2).toString();
+            operator = e.target.innerText;
+            display.textContent = num1;
+            num2 = "";
+            display.textContent += operator;
         }
     })
 })
@@ -50,21 +93,21 @@ buttonOperators.forEach(button => {
 
 // evaluate the numbers and returns a total
 function operate(operator, num1, num2) {
-    let total = 0;
     switch (operator) {
         case "+":
-            add(num1, num2);
+            total = add(+num1, +num2);
             break;
         case "-":
-            subtract(num1, num2);
+            total = subtract(+num1, +num2);
             break;
         case "x":
-            multiply(num1, num2);
+            total = multiply(+num1, +num2);
             break;
         case "/":
-            divide(num1, num2);
+            total = divide(+num1, +num2);
             break;
     }
+    return total;
 }
 
 function add(num1, num2) {
@@ -80,5 +123,10 @@ function multiply(num1, num2) {
 }
 
 function divide(num1, num2) {
+    if (num2 == 0){
+        alert("Do not divide by 0!");
+        num2 = "";
+        return;
+    }
     return (+num1 / +num2).toFixed(1);
 }
