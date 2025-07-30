@@ -9,13 +9,12 @@ const buttonClear = document.querySelector(".clear");
 const buttonBackSpace = document.querySelector(".backspace");
 
 // Number and operator variables
+const numbers = "0123456789";
 let num1 = "";
 let num2 = "";
 let operator = "";
 let total = "";
 let attempt = 0;
-
-
 
 
 // Events
@@ -90,6 +89,18 @@ buttonOperators.forEach(button => {
     })
 })
 
+// keyboard support
+document.addEventListener("keydown", (e) => {
+    if (numbers.includes(e.key) == true) {
+        if (operator === "") {
+            display.textContent += e.key;
+            return num1 += e.key;
+        } else {
+            display.textContent += e.key;
+            return num2 += e.key;
+        }
+    }
+});
 
 // evaluate the numbers and returns a total
 function operate(operator, num1, num2) {
