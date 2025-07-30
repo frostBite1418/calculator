@@ -1,82 +1,50 @@
 const display = document.querySelector(".display");
 
-// buttons for digits
-const buttonZero = document.querySelector(".zero");
-const buttonOne = document.querySelector(".one");
-const buttonTwo = document.querySelector(".two");
-const buttonThree = document.querySelector(".three");
-const buttonFour = document.querySelector(".four");
-const buttonFive = document.querySelector(".five");
-const buttonSix = document.querySelector(".six");
-const buttonSeven = document.querySelector(".seven");
-const buttonEight = document.querySelector(".eight");
-const buttonNine = document.querySelector(".nine");
+// buttons
+const buttonNumbers = document.querySelectorAll(".number");
+const buttonOperators = document.querySelectorAll(".operator");
+const buttonEquals = document.querySelector(".equals");
+const buttonDot = document.querySelector(".dot");
+const buttonClear = document.querySelector(".clear");
+const buttonBackSpace = document.querySelector(".backspace");
 
 // Number and operator variables
-let num1;
-let num2;
-let operator;
-let displayNumber = "";
+let num1 = "";
+let num2 = "";
+let operator = "";
 
 // update display when button is clicked
-buttonZero.addEventListener("click", () => {
-    displayNumber += "0";
-    display.textContent += "0";
+buttonBackSpace.addEventListener("click", () => {
+    // displayNumber.at(-1) = ""
+    // display.textContent -= displayNumber;
 
 })
 
-buttonOne.addEventListener("click", () => {
-    displayNumber += "1";
-    display.textContent += "1";
+buttonClear.addEventListener("click", () => {
+    displayNumber = "";
+    display.textContent = "";
 
 })
 
-buttonTwo.addEventListener("click", () => {
-    displayNumber += "2";
-    display.textContent += "2";
-
+buttonNumbers.forEach(button => {
+    button.addEventListener("click", (e) => {
+        if (operator === "") {
+            num1 += e.target.innerText;
+            display.textContent += e.target.innerText;
+        } else {
+            num2 += e.target.innerText;
+            display.textContent += e.target.innerText;
+        }
+    })
 })
-
-buttonThree.addEventListener("click", () => {
-    displayNumber += "3";
-    display.textContent += "3";
-
-})
-
-buttonFour.addEventListener("click", () => {
-    displayNumber += "4";
-    display.textContent += "4";
-
-})
-
-buttonFive.addEventListener("click", () => {
-    displayNumber += "5";
-    display.textContent += "5";
-
-})
-
-buttonSix.addEventListener("click", () => {
-    displayNumber += "6";
-    display.textContent += "6";
-
-})
-
-buttonSeven.addEventListener("click", () => {
-    displayNumber += "7";
-    display.textContent += "7";
-
-})
-
-buttonEight.addEventListener("click", () => {
-    displayNumber += "8";
-    display.textContent += "8";
-
-})
-
-buttonNine.addEventListener("click", () => {
-    displayNumber += "9";
-    display.textContent += "9";
-
+    
+buttonOperators.forEach(button => {
+    button.addEventListener("click", (e) => {
+        if (operator === "") {
+            operator += e.target.innerText;
+            display.textContent += e.target.innerText;
+        }
+    })
 })
 
 
@@ -90,7 +58,7 @@ function operate(operator, num1, num2) {
         case "-":
             subtract(num1, num2);
             break;
-        case "X":
+        case "x":
             multiply(num1, num2);
             break;
         case "/":
