@@ -10,6 +10,8 @@ const buttonBackSpace = document.querySelector(".backspace");
 
 // Number and operator variables
 const numbers = "0123456789";
+const operators = "+-x/";
+const equals = "Enter";
 let num1 = "";
 let num2 = "";
 let operator = "";
@@ -89,7 +91,7 @@ buttonOperators.forEach(button => {
     })
 })
 
-// keyboard support
+// keyboard support for digits
 document.addEventListener("keydown", (e) => {
     if (numbers.includes(e.key) == true) {
         if (operator === "") {
@@ -101,6 +103,29 @@ document.addEventListener("keydown", (e) => {
         }
     }
 });
+
+// keyboard support for operators
+document.addEventListener("keydown", (e) => {
+    if (operators.includes(e.key) == true) {
+        if (operator === "") {
+            display.textContent += e.key;
+            return operator = e.key;
+        }
+    }
+})
+
+// keyboard support for enter
+document.addEventListener("keydown", (e) => {
+    if (e.key == "Enter") {
+        if (display.textContent !== "") {
+        display.textContent = operate(operator, num1, num2);
+    }
+        operator = "";
+        num1 = operate(operator, num1, num2).toString();
+        num2 = "";
+        buttonDot.disabled = false;       
+    }
+})
 
 // evaluate the numbers and returns a total
 function operate(operator, num1, num2) {
