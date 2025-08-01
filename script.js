@@ -38,7 +38,7 @@ buttonDot.addEventListener("click", (e) => {
     } else {
         buttonDot.disabled = true;
         display.textContent += e.target.innerText;
-        return num1 += e.target.innerText;
+        return num2 += e.target.innerText;
     }
 })
 
@@ -124,6 +124,19 @@ document.addEventListener("keydown", (e) => {
         num1 = operate(operator, num1, num2).toString();
         num2 = "";
         buttonDot.disabled = false;       
+    }
+})
+
+// keyboard support for backspace
+document.addEventListener("keydown", (e) => {
+    if (e.key == "Backspace") {
+        if (operator === "") {
+            num1 = num1.substring(0, num1.length - 1)
+            display.textContent = num1;
+        } else {
+            num2 = num2.substring(0, num2.length - 1)
+            display.textContent = num1 + operator + num2;
+        }
     }
 })
 
