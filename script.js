@@ -140,6 +140,22 @@ document.addEventListener("keydown", (e) => {
     }
 })
 
+//keyboard support for creating floating numbers
+//buggy, how do you disable e.key after it has been pressed once (look at buttonDot);
+document.addEventListener("keydown", (e) => {
+    if (e.key == ".") {
+        if (operator === "") {
+            buttonDot.disabled = true;
+            display.textContent += e.key;
+            return num1 += e.key;
+        } else {
+            buttonDot.disabled = true;
+            display.textContent += e.key;
+            return num2 += e.key;
+        }
+    }
+})
+
 // evaluate the numbers and returns a total
 function operate(operator, num1, num2) {
     switch (operator) {
